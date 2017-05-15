@@ -76,3 +76,10 @@ public class BazaDanych {
             }
         }
     }
+public static void insertIntoSQL(String url, String nazwa) throws SQLException {
+        try (Connection conn = getConnection()) {
+            Statement stat = (Statement) conn.createStatement();
+            stat.executeUpdate("INSERT INTO linki VALUES(NULL,'" + url + "' , '" + nazwa + "')");
+        }
+
+    }
