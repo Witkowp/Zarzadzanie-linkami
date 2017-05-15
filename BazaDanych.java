@@ -83,3 +83,10 @@ public static void insertIntoSQL(String url, String nazwa) throws SQLException {
         }
 
     }
+public static void deleteFromSQL(int urlid) throws SQLException{
+        try(Connection conn=getConnection()){
+            Statement stat= (Statement) conn.createStatement();
+            stat.executeUpdate("DELETE FROM linki WHERE urlid="+urlid);
+        }
+    
+    }
