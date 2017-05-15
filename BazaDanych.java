@@ -17,6 +17,8 @@ import java.util.Scanner;
  *
  * @author Piotr
  */
+
+//Jest to czesc progrmau ktora bedzie sluzyc do zarzadzania baza danych
 public class BazaDanych {
 
     /**
@@ -67,11 +69,11 @@ public class BazaDanych {
             Statement stat = (Statement) conn.createStatement();
             try (ResultSet result = stat.executeQuery("SELECT url,nazwa FROM linki WHERE urlid=" + urlid);) {
                 if (result.next()) {
-                    System.out.println(result.getString("url"));
+                    System.out.println(result.getString("url"));// wybieram url z pobranego rekordu
                     if (Desktop.isDesktopSupported()) {
-                        Desktop.getDesktop().browse(new URI(result.getString("url")));
+                        Desktop.getDesktop().browse(new URI(result.getString("url")));//otwiera, domyslna przegladarke 
                     }
-                    System.out.println(result.getString("nazwa"));
+                    System.out.println(result.getString("nazwa"));//wypisuje nazwe linku
                 }
             }
         }
@@ -79,23 +81,23 @@ public class BazaDanych {
 public static void insertIntoSQL(String url, String nazwa) throws SQLException {
         try (Connection conn = getConnection()) {
             Statement stat = (Statement) conn.createStatement();
-            stat.executeUpdate("INSERT INTO linki VALUES(NULL,'" + url + "' , '" + nazwa + "')");
+            stat.executeUpdate("INSERT INTO linki VALUES(NULL,'" + url + "' , '" + nazwa + "')");//wstawiam do bazy danych 
         }
 
     }
 public static void deleteFromSQL(int urlid) throws SQLException{
         try(Connection conn=getConnection()){
             Statement stat= (Statement) conn.createStatement();
-            stat.executeUpdate("DELETE FROM linki WHERE urlid="+urlid);
+            stat.executeUpdate("DELETE FROM linki WHERE urlid="+urlid);//usuwam dane z bazy danych
         }
     
     }
 public static Connection getConnection() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/listaurl";
+        String url = "jdbc:mysql://localhost:3306/listaurl";//url do mojej bazy danych
         Properties prop = new Properties();
-        prop.setProperty("user", "root");
+        prop.setProperty("user", "root");//nazwa uzytkownika
         prop.setProperty("password", "");
-        Driver d = new com.mysql.jdbc.Driver();
-        Connection con = (Connection) d.connect(url, prop);
+        Driver d = new com.mysql.jdbc.Driver();//do obslugi bazy danych urzywam jdbc
+        Connection con = (Connection) d.connect(url, prop);//ustawiam polaczenie z lokalna baza danych
         return con;
     }
