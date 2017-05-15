@@ -36,3 +36,28 @@ public class BazaDanych {
 
         }
     }
+
+    public static void runTest() throws SQLException, IOException, URISyntaxException {
+        Scanner sc = new Scanner(System.in);
+        String nowyURL;
+        String nazwa;
+        int id;
+        System.out.println("Podaj nr id:");
+        if (sc.hasNextInt() == true) {
+            id = sc.nextInt();
+            getFromSQL(id);
+        } else {
+            System.out.println("Niepoprawne dane");
+        }
+        String cos = sc.nextLine();
+
+        System.out.println("Wstaw link:");
+        nowyURL = sc.nextLine();
+        System.out.println("Podaj nazwe:");
+        nazwa = sc.nextLine();
+
+        insertIntoSQL(nowyURL, nazwa);
+        System.out.println("Podaj id które chcesz usunąć:");
+        int delId=sc.nextInt();
+        deleteFromSQL(delId);
+    }   
