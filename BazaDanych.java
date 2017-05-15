@@ -61,3 +61,18 @@ public class BazaDanych {
         int delId=sc.nextInt();
         deleteFromSQL(delId);
     }   
+
+    public static void getFromSQL(int urlid) throws SQLException, IOException, URISyntaxException {
+        try (Connection conn = getConnection()) {
+            Statement stat = (Statement) conn.createStatement();
+            try (ResultSet result = stat.executeQuery("SELECT url,nazwa FROM linki WHERE urlid=" + urlid);) {
+                if (result.next()) {
+                    System.out.println(result.getString("url"));
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().browse(new URI(result.getString("url")));
+                    }
+                    System.out.println(result.getString("nazwa"));
+                }
+            }
+        }
+    }
