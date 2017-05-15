@@ -90,3 +90,12 @@ public static void deleteFromSQL(int urlid) throws SQLException{
         }
     
     }
+public static Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/listaurl";
+        Properties prop = new Properties();
+        prop.setProperty("user", "root");
+        prop.setProperty("password", "");
+        Driver d = new com.mysql.jdbc.Driver();
+        Connection con = (Connection) d.connect(url, prop);
+        return con;
+    }
