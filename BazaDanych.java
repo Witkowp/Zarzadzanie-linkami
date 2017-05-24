@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package bazadanych;
 
 import com.mysql.jdbc.Connection;
@@ -17,8 +22,6 @@ import java.util.Scanner;
  *
  * @author Piotr
  */
-
-//Jest to czesc progrmau ktora bedzie sluzyc do zarzadzania baza danych
 public class BazaDanych {
 
     /**
@@ -42,7 +45,7 @@ public class BazaDanych {
     public static void runTest() throws SQLException, IOException, URISyntaxException {
         Scanner sc = new Scanner(System.in);
         String nowyURL;
-        String nazwa;
+        String nazwa,sciezka;
         int id;
         System.out.println("Podaj nr id:");
         if (sc.hasNextInt() == true) {
@@ -57,8 +60,10 @@ public class BazaDanych {
         nowyURL = sc.nextLine();
         System.out.println("Podaj nazwe:");
         nazwa = sc.nextLine();
-
-        insertIntoSQL(nowyURL, nazwa);
+        
+        System.out.println("Podaj sciezke:");
+        sciezka = sc.nextLine();
+        insertIntoSQL(nowyURL, nazwa,sciezka);
         System.out.println("Podaj id które chcesz usunąć:");
         int delId=sc.nextInt();
         deleteFromSQL(delId);
@@ -69,35 +74,57 @@ public class BazaDanych {
             Statement stat = (Statement) conn.createStatement();
             try (ResultSet result = stat.executeQuery("SELECT url,nazwa FROM linki WHERE urlid=" + urlid);) {
                 if (result.next()) {
-                    System.out.println(result.getString("url"));// wybieram url z pobranego rekordu
+                    System.out.println(result.getString("url"));
                     if (Desktop.isDesktopSupported()) {
-                        Desktop.getDesktop().browse(new URI(result.getString("url")));//otwiera, domyslna przegladarke 
+                        Desktop.getDesktop().browse(new URI(result.getString("url")));
                     }
-                    System.out.println(result.getString("nazwa"));//wypisuje nazwe linku
+                    System.out.println(result.getString("nazwa"));
                 }
             }
         }
     }
-public static void insertIntoSQL(String url, String nazwa) throws SQLException {
+
+    public static void insertIntoSQL(String url, String nazwa,String sciezkaDoPliku) throws SQLException {
         try (Connection conn = getConnection()) {
             Statement stat = (Statement) conn.createStatement();
-            stat.executeUpdate("INSERT INTO linki VALUES(NULL,'" + url + "' , '" + nazwa + "')");//wstawiam do bazy danych 
+            stat.executeUpdate("INSERT INTO linki VALUES(NULL,'" + url + "' , '" + nazwa + "', '" + sciezkaDoPliku + "')");
         }
 
     }
-public static void deleteFromSQL(int urlid) throws SQLException{
+    public static void deleteFromSQL(int urlid) throws SQLException{
         try(Connection conn=getConnection()){
             Statement stat= (Statement) conn.createStatement();
-            stat.executeUpdate("DELETE FROM linki WHERE urlid="+urlid);//usuwam dane z bazy danych
+            stat.executeUpdate("DELETE FROM linki WHERE urlid="+urlid);
         }
     
     }
-public static Connection getConnection() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/listaurl";//url do mojej bazy danych
+
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/listaurl";
         Properties prop = new Properties();
-        prop.setProperty("user", "root");//nazwa uzytkownika
+        prop.setProperty("user", "root");
         prop.setProperty("password", "");
-        Driver d = new com.mysql.jdbc.Driver();//do obslugi bazy danych urzywam jdbc
-        Connection con = (Connection) d.connect(url, prop);//ustawiam polaczenie z lokalna baza danych
+        Driver d = new com.mysql.jdbc.Driver();
+        Connection con = (Connection) d.connect(url, prop);
         return con;
     }
+
+    public static void test() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/mysql";
+        Properties prop = new Properties();
+        prop.setProperty("user", "root");
+        prop.setProperty("password", "");
+        Driver d = new com.mysql.jdbc.Driver();
+        Connection con = (Connection) d.connect(url, prop);
+        if (con == null) {
+            System.out.println("connection failed");
+            return;
+        }
+        DatabaseMetaData dm = (DatabaseMetaData) con.getMetaData();
+        String dbversion = dm.getDatabaseProductVersion();
+        String dbname = dm.getDatabaseProductName();
+        System.out.println("name:" + dbname);
+        System.out.println("version:" + dbversion);
+
+    }
+}
