@@ -42,7 +42,7 @@ public class BazaDanych {
         }
     }
 
-    public static void runTest() throws SQLException, IOException, URISyntaxException {
+    public static void runTest() throws SQLException, IOException, URISyntaxException {//metoda testowa 
         Scanner sc = new Scanner(System.in);
         String nowyURL;
         String nazwa,sciezka;
@@ -69,7 +69,7 @@ public class BazaDanych {
         deleteFromSQL(delId);
     }   
 
-    public static void getFromSQL(int urlid) throws SQLException, IOException, URISyntaxException {
+    public static void getFromSQL(int urlid) throws SQLException, IOException, URISyntaxException {//pobieranie z bazy danych
         try (Connection conn = getConnection()) {
             Statement stat = (Statement) conn.createStatement();
             try (ResultSet result = stat.executeQuery("SELECT url,nazwa FROM linki WHERE urlid=" + urlid);) {
@@ -84,14 +84,14 @@ public class BazaDanych {
         }
     }
 
-    public static void insertIntoSQL(String url, String nazwa,String sciezkaDoPliku) throws SQLException {
+    public static void insertIntoSQL(String url, String nazwa,String sciezkaDoPliku) throws SQLException {//wstawianie do bazy danych
         try (Connection conn = getConnection()) {
             Statement stat = (Statement) conn.createStatement();
             stat.executeUpdate("INSERT INTO linki VALUES(NULL,'" + url + "' , '" + nazwa + "', '" + sciezkaDoPliku + "')");
         }
 
     }
-    public static void deleteFromSQL(int urlid) throws SQLException{
+    public static void deleteFromSQL(int urlid) throws SQLException{//usuwanie z bazy danych
         try(Connection conn=getConnection()){
             Statement stat= (Statement) conn.createStatement();
             stat.executeUpdate("DELETE FROM linki WHERE urlid="+urlid);
@@ -99,7 +99,7 @@ public class BazaDanych {
     
     }
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {//ustawienie polaczenia z baza danych
         String url = "jdbc:mysql://localhost:3306/listaurl";
         Properties prop = new Properties();
         prop.setProperty("user", "root");
@@ -109,7 +109,7 @@ public class BazaDanych {
         return con;
     }
 
-    public static void test() throws SQLException {
+    public static void test() throws SQLException {//test polaczenia z baza danych
         String url = "jdbc:mysql://localhost:3306/mysql";
         Properties prop = new Properties();
         prop.setProperty("user", "root");
