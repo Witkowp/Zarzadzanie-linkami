@@ -9,9 +9,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.DatabaseMetaData;
 import com.mysql.jdbc.Driver;
 import com.mysql.jdbc.Statement;
-import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -110,16 +108,16 @@ public class BazaDanych {
     }
 
     public static Connection getConnection() throws SQLException {//ustawienie polaczenia z baza danych
-        String url = "jdbc:mysql://localhost:3306/listaurl";
+        String url = "jdbc:mysql://45.77.55.209:3306/zarzadzanie";
         Properties prop = new Properties();
-        prop.setProperty("user", "root");
-        prop.setProperty("password", "");
+        prop.setProperty("user", "piopio");
+        prop.setProperty("password", "pw");
         Driver d = new com.mysql.jdbc.Driver();
         Connection con = (Connection) d.connect(url, prop);
         return con;
     }
 
-    public static void test() throws SQLException {//test polaczenia z baza danych
+    public static void test() throws SQLException {//test polaczenia z baza danych która jest lokalna
         String url = "jdbc:mysql://localhost:3306/mysql";
         Properties prop = new Properties();
         prop.setProperty("user", "root");
