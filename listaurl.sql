@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Maj 2017, 18:47
+-- Czas generowania: 25 Maj 2017, 06:55
 -- Wersja serwera: 10.1.19-MariaDB
 -- Wersja PHP: 5.6.28
 
@@ -38,10 +38,10 @@ CREATE TABLE `linki` (
 --
 
 INSERT INTO `linki` (`urlId`, `url`, `nazwa`, `folder`) VALUES
-(1, 'https://www.youtube.com/watch?v=99JAI24Zd24', 'Kurs MySql', '/home/youtube/kursMySql'),
-(2, 'https://www.facebook.com/', 'facebook', '/home/facebook'),
-(10, 'http://docs.oracle.com/javase/7/docs/technotes/guides/language/try-with-resources.html', 'try with statement', '/home/oracle/docs'),
-(14, 'https://help.github.com/articles/inviting-collaborators-to-a-personal-repository/', 'Git', '/home/git');
+(1, 'https://www.youtube.com/watch?v=99JAI24Zd24', 'Kurs MySql', '/home/youtube/kursMySql/'),
+(2, 'https://www.facebook.com/', 'facebook', '/home/facebook/'),
+(10, 'http://docs.oracle.com/javase/7/docs/technotes/guides/language/try-with-resources.html', 'try with statement', '/home/oracle/docs/'),
+(14, 'https://help.github.com/articles/inviting-collaborators-to-a-personal-repository/', 'Git', '/home/git/');
 
 --
 -- Indeksy dla zrzutów tabel
