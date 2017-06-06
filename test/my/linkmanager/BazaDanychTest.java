@@ -42,11 +42,12 @@ public class BazaDanychTest {
         String url = "";
         String nazwa = "";
         String sciezkaDoPliku = "";
-        long expResult = 0L;
-        long result = BazaDanych.insertIntoSQL("test",url, nazwa, sciezkaDoPliku);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Data expResult = new Data(39, "", "", "");
+        BazaDanych.insertIntoSQL("test",url, nazwa, sciezkaDoPliku);
+        List<Data> result = BazaDanych.getFromSQL("test");
+        if (!expResult.equals(result.get(2))){
+            fail("The test case is a prototype.");
+        }
     }
 
 
