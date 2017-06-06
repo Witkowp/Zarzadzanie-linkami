@@ -1,2 +1,13 @@
-# Zarzadzanie-linkami
-Program ma za zadanie przechowywac linki dodane przez uzytkownikow
+# Link manager
+
+##Description
+
+This is simple java program, which store users links in folders.
+
+## Requirements
+
+* JDK 8 >=
+* Mysql server
+* jdbc MySql drivers
+
+
