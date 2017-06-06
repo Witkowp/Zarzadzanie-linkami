@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  * @author rozanovk
  */
 public class BazaDanychTest {
-    
+
     @Test
     public void testGetFromSQL() throws Exception {
         System.out.println("getFromSQL");
@@ -28,9 +28,9 @@ public class BazaDanychTest {
         Data data = new Data(2,"facebook", "https://www.facebook.com/", "/home/facebook ");
         expResult.add(data);
         List<Data> result = BazaDanych.getFromSQL("test");
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        if (!(data.equals(result.get(0)))){
+            fail("The test case is a prototype.");
+        }
     }
 
     /**
